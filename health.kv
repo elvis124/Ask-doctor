@@ -1,0 +1,337 @@
+ScreenManagement:
+    Loginpage:
+    Homepage:
+    Register_patients:
+    Register_Doctors_details:
+    My_profile:
+#front end of loginpage
+<Loginpage>:
+    name: 'loginpage'
+    ActionBar:
+        size_hint: (1, .1)
+        pos_hint: {'top': 1}
+        background_color: [0,1,1,1]
+        ActionView:
+            ActionPrevious:
+                title: 'Ask a Doctor'
+                app_icon: 'icons/watch.png'
+                with_previous: False
+                color: [0,1,0,1]
+
+    StackLayout:
+        size_hint: (1, .3)
+        pos_hint: {'top': .8}
+        cols: 1
+        orientation: 'lr-tb'
+        canvas.before:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: 'icons/mid3.jpg'
+        Label: 
+            text: 'email'
+            font: 20
+            text_color: [1,0,1,0]
+            size_hint: (.2,.2)
+        TextInput:
+            id: n_email
+            size_hint: (.2, .2)
+            hint_text: 'example@maseno.com'
+            multline: False
+        Label: 
+            text: 'password'
+            size_hint: (.2, .2)
+        TextInput:
+            id: n_password
+            password: True
+            size_hint: (.2, .2)
+        Button:
+            id: forget
+            text: ' forgot_password ?'
+            color: [0,1,0,1]
+            size_hint: (.2, .2)
+            background_color: [1,1,1,0]
+            on_press: root.forgot_password() 
+    StackLayout:
+        orientation: 'tb-rl'
+        pos_hint: {'top': .5}
+        Button:
+            text: 'login'
+            color: [0,1,0,1]
+            font_size: 20
+            background_color: [1,1,1,0]
+            on_press: root.verifycredentials()
+            size_hint: (.1, .1)
+
+        Button:
+            id: register
+            text: 'Patient_Registration'
+            background_color: [1,1,1,0]
+            on_press:root.n_register()
+            size_hint: (.2, .2)
+        Button:
+            id: register_as_doc
+            text: 'Doctors Registration'
+            background_color: [1,1,1,0]
+            on_press: root.register_as_doc()
+            size_hint: (.2, .2)
+
+
+#front_end of homepage
+<Homepage>:
+    name: 'homepage'
+    ActionBar:
+        id: actionbar
+        size_hint: (1, .1)
+        pos_hint: {'top': 1}
+        background_color: [1,1,1,1]
+        ActionView:
+            ActionPrevious:
+                id: n_actionbar
+                title: 'ASK'
+                app_icon: 'icons/watch.png'
+                with_previous: False
+                color: [0,1,0,1]
+                TextInput:
+                    id: n_actionbar
+                    multline: False
+                    background_color: [1,1,1,0]
+                    is_focusable: True 
+                StackLayout:
+                    orientation: 'lr-tb'
+                    TextInput:
+                        id: n_location
+                        multline: False
+                        size_hint: (5, .5)
+                        background_color: [0,0,0,0]
+                        pos_hint: {'top': 1}
+
+            ActionButton:
+                id: my_account
+                text: 'Profile'
+                color: [0,1,0,1]
+                background_color: [1,1,1,1]
+                on_press: root.manager.current='my_profile'
+                on_release: root.n_gps()
+            ActionButton:
+                text: 'logout'
+                color: [0,0,0,1]
+                on_release: root.manager.current='loginpage'
+                background_color: [1,1,1,1]
+                pos_hint: {'top': 1}
+    ScrollView:
+        pos_hint: {'top': .9 , 'right': 1}
+        size_hint: (1, .9)
+        StackLayout:
+            cols: 1
+            canvas.before:
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+                    source: 'icons/mid3.jpg'
+            Bubble:
+                size_hint: (1, .1)
+                arrow_pos: 'left_mid'
+                show_arrow: True
+                orientation: 'horizontal'
+                BubbleButton:
+                    id:  listofcontents
+                    text: 'Home'
+                    color: [0,1,1,1]
+                    on_press: root.listofcon()
+                BubbleButton:
+                    id: n_chats
+                    text: 'chats'
+                    color: [0,1,1,1]
+                    on_press: root.n_chats()
+            ScrollView:
+                pos_hint: {'top': 1, 'right': 1}
+                scroll_type: ['bars','content']
+                bar_color: [0,0,1,1]
+                size_hint: (1,.9)
+                GridLayout:
+                    cols: 1
+                    id:listview
+
+#front end of registering patients
+<Register_patients>:
+    name: 'register'
+    GridLayout:
+        cols: 1
+        orientation: 'tb-lr'
+        Button:
+            text: 'Patient Section       ||.........||   ">>Doctors.>>'
+            on_release: root.manager.current='doctors_section'
+            background_color: [1,0,1,1]
+        Label:
+            text: 'username       (Patient)'
+            size: (1, .9)
+        TextInput:
+            id: n_username
+            multline: False
+            size_hint: (1,.9)
+            hint_text: 'omondi322'
+        Label:
+            text: 'full name'
+        TextInput:
+            id: n_full_name
+            multline: False
+            size_hint: (1, .9)
+            hint_text: 'elvis ian omondi'
+        Label:
+            text: 'email_address'
+        TextInput:
+            id: n_email_address
+            multline: False
+            hint_text: 'email_address'
+        Label:
+            text: 'Residential_center'
+        TextInput:
+            id: n_Residential_center
+            multline: False
+            hint_text: 'kenya, mabungo'
+        Label:
+            text: 'password'
+        TextInput:
+            id: n_password
+            password: True
+            multline: False
+            hint_text: 'we2;;ss/1-aa=+sw*/'
+        Label:
+            text: 'confirm_password'
+        TextInput:
+            multline: False
+            password: True
+            id: n_confirm_password
+            multline: False
+            hint_text: '*********'
+        Button:
+            text: 'Register'
+            on_press: root.n_Register()
+#front end of doctors registration
+
+<Register_Doctors_details>:
+    name: 'doctors_section'
+    GridLayout:
+        id: doctors_details
+        cols: 1
+        orientation: 'tb-lr'
+        Button:
+            text: 'Doctors section        :>>patients>>'
+            on_release: root.manager.current='register'
+            background_color: [1,0,1,1]
+            pos_hint: {'top': 1}
+        Label:
+            text: 'Full Name              (Health proffesional)'
+        TextInput:
+            id: n_full_name
+            multline: False
+            hint_text: 'example: Dr.buguhgiujh, Mr.dfregin, Miss.zadge, Mrs.Omondi'
+        Label:
+            text: 'email_address'
+        TextInput: 
+            id: n_email_address
+            multline: False
+            hint_text: 'exaple@masrf.com'
+        Label:
+            text: 'phone_number'
+        TextInput:
+            id: n_phone_number
+            multline: False
+            hint_text: 'example: 254715.........88'
+        Label:
+            text: 'work_number'
+        TextInput:
+            id: n_work_number
+            multline: False
+            hint_text: ' provided by Ministy of Health'
+        Label:
+            text: 'password'
+        TextInput:
+            id: n_password
+            multline: False
+            password: True
+            hint_text: 'password'
+        Label:
+            text: 'confirm_password'
+        TextInput:
+            id: n_confirm_password
+            multline: False
+            password: True
+            hint_text: 'we@sdhsi.com'
+        Button:
+            text: 'Regsiter'
+            on_press: root.nn_Register()
+#front end of my profile
+
+<My_profile>:
+    name: 'my_profile'
+    ActionBar:
+        size_hint: (1, .1)
+        pos_hint: {'top': 1}
+        ActionView:
+            ActionPrevious:
+                with_previous: False
+                app_icon: 'icons/watch.png'
+            ActionButton:
+                text: 'back'
+                color: [0,1,0,1]
+                on_press: root.manager.current='homepage'
+    GridLayout:
+        cols: 2
+        size_hint: (1 ,.9)
+        orientation: 'vertical'
+        StackLayout:
+            cols: 1
+            size_hint: (.5,1)
+            orientation: 'tb-lr'
+            Button:
+                text: 'profile'
+                background_color: [1,1,1,0]
+                on_release: root.profile_photo()
+                size_hint: (1, .2)
+            Button:
+                text: 'status'
+                size_hint: (1, .2)
+                background_color: [1,1,1,0]
+                on_press: root.status()
+            Button:
+                text: 'Privacy'
+                background_color: [1,1,1,0]
+                size_hint: (1, .2)
+                on_press: root.privacy()
+            Button:
+                text: 'Help'
+                background_color: [1,1,1,0]
+                size_hint: (1, .2)
+                on_press: root.help()
+        StackLayout:
+            id: display_layout
+            cols: 1
+            size_hint: (.5, 1)
+            orientation: 'tb-lr'        
+<Docone>:
+    cols: 2
+    canvas.before:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: 'icons/mid33.png'
+    TextInput:
+        id: doctors_registration
+        multline: True
+        background_color: [1,1,1,0]
+<Imagesel>:
+    cols: 1
+    StackLayout:
+        cols: 1
+        orientation: "tb-lr"
+        ScrollView:
+            bar_width: 3
+            FileChooserListView:
+                id: filechooser
+                on_selection: root.loading(filechooser.path, filechooser.selection)
+
+
+
+    
